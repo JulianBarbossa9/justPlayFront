@@ -5,6 +5,7 @@ import useCity from '../hooks/useCity';
 import useSport from '../hooks/useSport';
 import useGame from '../hooks/useGame';
 import { GameInterface } from '../interface/game.interface';
+import Error from './Error';
 
 interface ModalCreateGameProps {
   onClose: () => void;
@@ -17,11 +18,20 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose }) => {
   const [endTime, setEndTime] = useState<string | Date>('');
   const [cityId, setCityId] = useState<number>();
   const [sportId, setSportId] = useState<number>();
+  const [ error, setError ] = useState<boolean>(false)
 
   const {createGame } = useGame()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    //validate fields not empty
+    if(!name || !startTime || !endTime || !cityId || !sportId) {
+      setError(true)
+      return
+    }
+    setError(false)
+
     const gameData: GameInterface = {
       name,
       description: description || '',
@@ -39,9 +49,6 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose }) => {
   const { cityList } = useCity()
   const { sportList } = useSport()
 
-  console.log(startTime)
-  console.log(endTime)
-
 
   return (
     
@@ -49,7 +56,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose }) => {
     <div className='fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center '>
       <div className="modal-overlay" onClick={onClose} />
       <div className='bg-white p-20 rounded-xl  w-max'>
-      
+      { error && <Error>Fields with <span>*</span> are Required </Error>}
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className='border-b border-gray-900/10 pb-12 mt-10'>
             <h2 className="text-2xl font-bold   leading-7 text-gray-900">Create Game</h2>
@@ -58,7 +65,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose }) => {
             <div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
               <div className='sm:col-span-3'>
                 <label htmlFor="name-game" className="block text-sm font-medium leading-6 text-gray-900">
-                  Name of The Game:
+                  Name of The Game *:
                 </label>
                 <div className='mt-2'>
                   <input 
@@ -94,7 +101,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose }) => {
                   htmlFor="start-game"
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Start Game:
+                  Start Game *:
                 </label>
                 <div className='mt-2'>
                   <input 
@@ -112,7 +119,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose }) => {
                   htmlFor="end-game"
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  End Game:
+                  End Game *:
                 </label>
                 <div className='mt-2'>
                   <input 
@@ -130,7 +137,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose }) => {
                   htmlFor="city-game"
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Select City:
+                  Select City *:
                 </label>
                 <div className='mt-2'>
                   <select 
@@ -158,7 +165,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose }) => {
                   htmlFor="city-game"
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Select Sport:
+                  Select Sport *:
                 </label>
                 <div className='mt-2'>
                   <select 
