@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GameInterface } from "../interface/game.interface";
+import { CreateupdateGameI, GameInterface } from "../interface/game.interface";
 import axios from "axios";
 
 const useGame = () => {
@@ -76,7 +76,24 @@ const useGame = () => {
     }
   }
 
-  return { createGame, game, isLoading, error ,getGameByCity, gameByCity, getGameBySport, gameBySport, getAllGames, allGames };
+  const updateGame = async (gameData: GameInterface) => {
+    try {
+      const gameId = gameData.id;
+      setIsLoading(true)
+      const response = await axios.patch(`${URL}/${gameId}`, gameData)
+      if (response.status === 200) {
+        setGame(response.data)
+      } else {
+        setError("Error updating game")
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading
+    }
+  }
+
+  return { createGame, game, isLoading, error ,getGameByCity, gameByCity, getGameBySport, gameBySport, getAllGames, allGames, updateGame };
 };
 
 export default useGame;
