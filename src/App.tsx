@@ -1,15 +1,14 @@
 
 import './App.css'
-import Games from './components/Games'
-import NavBar from './components/NavBar'
+import FilterGames from './components/FilterGames'
 
 function App() {
   
 
   return (
     <>
-     <NavBar />
-     <Games />
+     <FilterGames />
+    
     </>
   )
 }
