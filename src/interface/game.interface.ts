@@ -2,7 +2,7 @@ import { CityInterface } from "./city.interface";
 import { SportInteface } from "./sport.interface";
 
 export interface GameInterface {
-  // id?: string;
+  id?: number;
   name: string;
   description: string | null;
   startTime: Date | string;
