@@ -3,15 +3,15 @@
 import { useState } from 'react';
 import useCity from '../hooks/useCity';
 import useSport from '../hooks/useSport';
-import useGame from '../hooks/useGame';
 import { GameInterface } from '../interface/game.interface';
 import Error from './Error';
 
 interface ModalCreateGameProps {
   onClose: () => void;
+  createGame: (game: GameInterface) => void;
 }
 
-const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose }) => {
+const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose, createGame }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [startTime, setStartTime] = useState<string | Date>('');
@@ -20,7 +20,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose }) => {
   const [sportId, setSportId] = useState<number>();
   const [ error, setError ] = useState<boolean>(false)
 
-  const {createGame } = useGame()
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
