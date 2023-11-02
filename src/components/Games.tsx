@@ -116,7 +116,7 @@ const Games = ({
               );
             })
           ) : (
-            <div className="flex justify-center mt-5">
+            <div className="flex justify-center  items-center mt-8">
               <HashLoader color={"#2e2f30"} loading={true} size={100} />
             </div>
           )}
