@@ -25,7 +25,7 @@ const GameCard = ({
           <img src={sport?.image ?? ''} alt={sport?.name} className="w-full h-40" /> 
         </div>
         <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">{name}</div>
+          <div className="font-bold text-xl mb-2 capitalize">{name}</div>
           <p className="text-gray-700 text-base">{description}</p>
         </div>
         <div className="px-6 pt-4 pb-2">
