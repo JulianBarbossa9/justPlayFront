@@ -17,8 +17,15 @@ const FilterGames = () => {
   const { cityList } = useCity();
   const { sportList } = userSport();
 
-  const {allGames,getAllGames,createGame,getGameByCity, getGameBySport, deleteGame, updateGame}=useGame()
-  
+  const {
+    allGames,
+    getAllGames,
+    createGame,
+    getGameByCity,
+    getGameBySport,
+    deleteGame,
+    updateGame,
+  } = useGame();
 
   const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedCityId = parseInt(event.target.value);
@@ -43,7 +50,6 @@ const FilterGames = () => {
     setIsModalOpen(false);
   };
 
-
   return (
     <>
       {/* <NavBar /> */}
@@ -58,7 +64,9 @@ const FilterGames = () => {
         <div className="flex items-center">
           <div>
             <Button onClick={openModal} text="Add" />
-            {isModalOpen && <ModalCreateGame onClose={closeModal} createGame={createGame}/>}
+            {isModalOpen && (
+              <ModalCreateGame onClose={closeModal} createGame={createGame} />
+            )}
           </div>
         </div>
       </div>
@@ -108,7 +116,6 @@ const FilterGames = () => {
         deleteGame={deleteGame}
         updateGame={updateGame}
       />
-      
     </>
   );
 };
