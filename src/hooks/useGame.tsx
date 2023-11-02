@@ -7,8 +7,8 @@ const useGame = () => {
   const [ allGames, setAllGames ] = useState<GameInterface[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [ gameByCity, setGameByCity ] = useState<GameInterface[]>()
-  const [ gameBySport, setGameBySport ] = useState<GameInterface[]>()
+  const [ gameByCity, _setGameByCity ] = useState<GameInterface[]>()
+  const [ gameBySport, _setGameBySport ] = useState<GameInterface[]>()
 
 
   const URL = "https://j2vk6ieugf.execute-api.us-east-1.amazonaws.com/prod/game"
