@@ -104,7 +104,7 @@ const FilterGames = () => {
         getAllGames={getAllGames}
         getGameByCity={getGameByCity}
         getGameBySport={getGameBySport}
-        
+        deleteGame={deleteGame}
       />
       
     </>
