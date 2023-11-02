@@ -17,7 +17,7 @@ const FilterGames = () => {
   const { cityList } = useCity();
   const { sportList } = userSport();
 
-  const {allGames,getAllGames,createGame,getGameByCity, getGameBySport, deleteGame}=useGame()
+  const {allGames,getAllGames,createGame,getGameByCity, getGameBySport, deleteGame, updateGame}=useGame()
   
 
   const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -42,6 +42,7 @@ const FilterGames = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
 
   return (
     <>
@@ -105,6 +106,7 @@ const FilterGames = () => {
         getGameByCity={getGameByCity}
         getGameBySport={getGameBySport}
         deleteGame={deleteGame}
+        updateGame={updateGame}
       />
       
     </>
