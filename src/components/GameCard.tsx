@@ -6,12 +6,8 @@ import { GameShowAllInterface } from "../interface/game.interface";
 const GameCard = ({
   name,
   city,
-  endTime,
-  startTime,
   sport,
-  createdAt,
   description,
-  updatedAt,
   
 }: GameShowAllInterface) => {
   
