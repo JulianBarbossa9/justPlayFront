@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import GameCard from "./GameCard";
 import { GameInterface } from "../interface/game.interface";
 import { MdOutlineDelete } from "react-icons/md";
+import { FiEdit2 } from "react-icons/fi";
+import ModalCreateGame from "./ModalCreateGame";
 
 interface GamesProps {
   cityFilter?: number;
@@ -13,6 +15,7 @@ interface GamesProps {
   getGameByCity: (cityId: number) => void;
   getGameBySport: (sportId: number) => void;
   deleteGame: (gameId: number) => void;
+  updateGame: (gameData: GameInterface) => void;
 }
 
 const Games = ({
@@ -23,13 +26,15 @@ const Games = ({
   getAllGames,
   getGameByCity,
   getGameBySport,
-  deleteGame
+  deleteGame,
+  updateGame,
 }: GamesProps) => {
   const [games, setGames] = useState<GameInterface[]>([]);
-  
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [selectedGame, setSelectedGame] = useState<GameInterface | null>(null);
 
-  const resultSearch =
-  (allGames ? allGames : []).filter((data) =>
+
+  const resultSearch = (allGames ? allGames : []).filter((data) =>
     data.name.toLowerCase().includes(search?.toLowerCase() ?? "")
   );
 
@@ -82,12 +87,30 @@ const Games = ({
                     />
                     <div className="flex">
                       <button
-                        onClick={() => deleteGame(game.id)} 
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full ml-5 mt-2">
+                        onClick={() => {
+                          setModalIsOpen(true);
+                          setSelectedGame(game);
+                        }}
+                        className="bg-gray-300 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-xl ml-5 mt-2"
+                      >
+                        <FiEdit2 />
+                      </button>
+                      <button
+                        onClick={() => deleteGame(game.id)}
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl ml-2 mt-2"
+                      >
                         <MdOutlineDelete />
                       </button>
                     </div>
                   </div>
+                  {modalIsOpen && (
+                    <ModalCreateGame
+                      onClose={() => setModalIsOpen(false)}
+                      createGame={() => {}}
+                      selectedGame={selectedGame}
+                      updateGame={updateGame}
+                    />
+                  )}
                 </>
               );
             })
