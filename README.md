@@ -1,27 +1,29 @@
-# React + TypeScript + Vite
+# Repositorio Front-end Justplay
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+El proyecto fue creado con React(Vite), tailwind y Typescript, aca esta el despliegue del [proyecto](https://6543b06e066090068f5f5a65--lighthearted-druid-abaa4a.netlify.app)
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Clonar el repositorio, en la terminal deseada copie lo siguiente
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```bash
+git clone https://github.com/JulianBarbossa9/justPlayFront.git
+```
+Despues de esto vamos a la carpeta creada con:
+```bash
+cd react-app
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Luego de esto descargamos dependencias con:
+```bash
+npm install
+```
+
+Subir el proyecto locamente con el siguiente comando:
+
+```bash
+npm run dev
+```
+
+
+Con esto ya esta el front funcionando
