@@ -84,8 +84,15 @@ const useGame = () => {
       const gameId = gameData.id;
       setIsLoading(true)
       const response = await axios.patch(`${URL}/${gameId}`, gameData)
+      
       if (response.status === 200) {
-        setGame(response.data)
+        const updateGameIndex = allGames.findIndex((game) => game.id === gameId)
+        if(updateGameIndex !== -1) {
+          const updateAllGames = [...allGames]
+          updateAllGames[updateGameIndex] = response.data
+          setAllGames(updateAllGames)
+        }
+
       } else {
         setError("Error updating game")
       }
@@ -100,7 +107,6 @@ const useGame = () => {
     try {
       setIsLoading(true)
       const response = await axios.delete(`${URL}/${gameId}`)
-      console.log(response)
       if (response.status === 200) {
         const newGameList = allGames.filter((game) => game.id !== gameId)
         setAllGames(newGameList)
