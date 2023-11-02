@@ -102,7 +102,8 @@ const useGame = () => {
       const response = await axios.delete(`${URL}/${gameId}`)
       console.log(response)
       if (response.status === 200) {
-        setGame(response.data)
+        const newGameList = allGames.filter((game) => game.id !== gameId)
+        setAllGames(newGameList)
       } else {
         setError("Error deleting game")
       }
