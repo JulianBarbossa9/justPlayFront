@@ -1,6 +1,6 @@
 
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useCity from '../hooks/useCity';
 import useSport from '../hooks/useSport';
 import { GameInterface } from '../interface/game.interface';
@@ -9,9 +9,11 @@ import Error from './Error';
 interface ModalCreateGameProps {
   onClose: () => void;
   createGame: (game: GameInterface) => void;
+  selectedGame?: GameInterface | null;
+  updateGame?: (game: GameInterface) => void;
 }
 
-const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose, createGame }) => {
+const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose, createGame, selectedGame, updateGame }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [startTime, setStartTime] = useState<string | Date>('');
@@ -21,7 +23,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose, createGame }
   const [ error, setError ] = useState<boolean>(false)
 
 
-
+  
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -40,14 +42,36 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose, createGame }
       cityId: cityId || 0,
       sportId: sportId || 0,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      // id: selectedGame?.id ?? 0,
+      id: selectedGame ? selectedGame.id : 0,
     }
-    createGame(gameData)
+    
+    if (selectedGame) {
+      if (updateGame) {
+        updateGame(gameData);
+      }
+    } else {
+      createGame(gameData);
+    }
     onClose();
   };
 
   const { cityList } = useCity()
   const { sportList } = useSport()
+
+  // console.log(selectedGame)
+
+  useEffect(() => {
+    if(selectedGame) {
+      setName(selectedGame.name)
+      setDescription(selectedGame.description ?? '')
+      setStartTime(selectedGame.startTime)
+      setEndTime(selectedGame.endTime)
+      setCityId(selectedGame.cityId)
+      setSportId(selectedGame.sportId)
+    }
+  }, [selectedGame]);
 
 
   return (
