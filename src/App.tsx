@@ -1,16 +1,12 @@
-
-import './App.css'
-import FilterGames from './components/FilterGames'
+import "./App.css";
+import FilterGames from "./components/FilterGames";
 
 function App() {
-  
-
   return (
     <>
-     <FilterGames />
-    
+      <FilterGames />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
