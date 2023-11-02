@@ -89,7 +89,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose, createGame, 
             <div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
               <div className='sm:col-span-3'>
                 <label htmlFor="name-game" className="block text-sm font-medium leading-6 text-gray-900">
-                  Name of The Game *:
+                  Name of The Game <span className=' text-mainlyButton'>*</span>:
                 </label>
                 <div className='mt-2'>
                   <input 
@@ -126,7 +126,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose, createGame, 
                   htmlFor="start-game"
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Start Game *:
+                  Start Game <span className=' text-mainlyButton'>*</span>:
                 </label>
                 <div className='mt-2'>
                   <input 
@@ -144,7 +144,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose, createGame, 
                   htmlFor="end-game"
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  End Game *:
+                  End Game <span className=' text-mainlyButton'>*</span>:
                 </label>
                 <div className='mt-2'>
                   <input 
@@ -162,7 +162,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose, createGame, 
                   htmlFor="city-game"
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Select City *:
+                  Select City <span className=' text-mainlyButton'>*</span>:
                 </label>
                 <div className='mt-2'>
                   <select 
@@ -190,7 +190,7 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose, createGame, 
                   htmlFor="city-game"
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Select Sport *:
+                  Select Sport <span className=' text-mainlyButton'>*</span>:
                 </label>
                 <div className='mt-2'>
                   <select 
@@ -216,10 +216,10 @@ const ModalCreateGame: React.FC<ModalCreateGameProps> = ({ onClose, createGame, 
             </div>
           
           </div>
-          <button type="submit" className='py-2 px-8  rounded-xl font-bold text-slate-100 bg-mainlyButton mt-5'>{ selectedGame ? "Edit Game" : "Create Game"}</button>
+          <button type="submit" className='py-2 px-8  rounded-xl font-bold text-slate-100 bg-mainlyButton mt-5 hover:bg-gray-500'>{ selectedGame ? "Edit Game" : "Create Game"}</button>
           
         </form>
-        <button className='mt-5 border-2 rounded-md p-4' onClick={onClose}>
+        <button className='mt-5 border-2 rounded-md p-4 hover:border-2 hover:border-mainlyButton hover:text-mainlyButton' onClick={onClose}>
           Cancel
         </button>
       
