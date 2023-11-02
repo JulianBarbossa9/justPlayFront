@@ -6,6 +6,7 @@ import userSport from "../hooks/useSport";
 import Games from "./Games";
 import Button from "./Button";
 import ModalCreateGame from "./ModalCreateGame";
+import useGame from "../hooks/useGame";
 
 const FilterGames = () => {
   const [cityId, setCityData] = useState<number | null>(null);
@@ -15,8 +16,9 @@ const FilterGames = () => {
 
   const { cityList } = useCity();
   const { sportList } = userSport();
-  // const { getGameByCity, getGameBySport } = useGame()
-  console.log(sportId);
+
+  const {allGames,getAllGames,createGame,getGameByCity, getGameBySport, deleteGame}=useGame()
+  
 
   const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedCityId = parseInt(event.target.value);
@@ -55,7 +57,7 @@ const FilterGames = () => {
         <div className="flex items-center">
           <div>
             <Button onClick={openModal} text="Add" />
-            {isModalOpen && <ModalCreateGame onClose={closeModal} />}
+            {isModalOpen && <ModalCreateGame onClose={closeModal} createGame={createGame}/>}
           </div>
         </div>
       </div>
@@ -67,7 +69,7 @@ const FilterGames = () => {
           onChange={handleCityChange}
           value={cityId || ""}
         >
-          <option key="">Cities</option>
+          <option>Cities</option>
           {cityList.map((city: CityInterface) => (
             <option key={city.id} value={city.id}>
               {city.name}
@@ -79,7 +81,7 @@ const FilterGames = () => {
           onChange={handleSportChange}
           value={sportId || ""}
         >
-          <option key="">Sports</option>
+          <option>Sports</option>
           {sportList.map((sport: SportInteface) => (
             <option key={sport.id} value={sport.id}>
               {sport.name}
@@ -98,7 +100,13 @@ const FilterGames = () => {
         cityFilter={cityId ?? undefined}
         sportFilter={sportId ?? undefined}
         search={search}
+        allGames={allGames}
+        getAllGames={getAllGames}
+        getGameByCity={getGameByCity}
+        getGameBySport={getGameBySport}
+        
       />
+      
     </>
   );
 };
