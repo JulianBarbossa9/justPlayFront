@@ -4,6 +4,7 @@ import { GameInterface } from "../interface/game.interface";
 import { MdOutlineDelete } from "react-icons/md";
 import { FiEdit2 } from "react-icons/fi";
 import ModalCreateGame from "./ModalCreateGame";
+import { HashLoader } from "react-spinners";
 
 interface GamesProps {
   cityFilter?: number;
@@ -115,7 +116,9 @@ const Games = ({
               );
             })
           ) : (
-            <p>No se encontraron resultados.</p>
+            <div className="flex justify-center mt-5">
+              <HashLoader color={"#2e2f30"} loading={true} size={100} />
+            </div>
           )}
         </div>
       </main>
