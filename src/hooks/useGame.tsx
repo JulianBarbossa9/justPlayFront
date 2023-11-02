@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CreateupdateGameI, GameInterface } from "../interface/game.interface";
+import {  GameInterface } from "../interface/game.interface";
 import axios from "axios";
 
 const useGame = () => {
@@ -16,8 +16,9 @@ const useGame = () => {
     try {
       setIsLoading(true);
       const response = await axios.post(URL, gameData);
-      if (response.status === 201) {
+      if (response.status === 200) {
         setGame(response.data);
+        setAllGames([...allGames, response.data])
       } else {
         setError("Error creating game");
       }
@@ -48,8 +49,10 @@ const useGame = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(`${URL}/${cityId}`);
+      
       if (response.status === 200) {
-        setGameByCity(response.data);
+        setAllGames(response.data);
+        // console.log(gameByCity)
       } else {
         setError("Error getting game");
       }
@@ -65,7 +68,7 @@ const useGame = () => {
       setIsLoading(true);
       const response = await axios.get(`${URL}/sports/${sportId}`);
       if ( response.status === 200) {
-        setGameBySport(response.data);
+        setAllGames(response.data);
       } else {
         setError("Error getting game");
       }
@@ -93,7 +96,24 @@ const useGame = () => {
     }
   }
 
-  return { createGame, game, isLoading, error ,getGameByCity, gameByCity, getGameBySport, gameBySport, getAllGames, allGames, updateGame };
+  const deleteGame = async (gameId: number) => {
+    try {
+      setIsLoading(true)
+      const response = await axios.delete(`${URL}/${gameId}`)
+      console.log(response)
+      if (response.status === 200) {
+        setGame(response.data)
+      } else {
+        setError("Error deleting game")
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  return { createGame, game, isLoading, error ,getGameByCity, gameByCity, getGameBySport, gameBySport, getAllGames, allGames, updateGame, deleteGame };
 };
 
 export default useGame;
